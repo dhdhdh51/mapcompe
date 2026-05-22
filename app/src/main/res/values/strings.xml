@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Geo Alert</string>
+    <string name="app_subtitle">Proximity-based location alarm</string>
+
+    <!-- Drawer -->
+    <string name="drawer_title">Alarm Settings</string>
+    <string name="drawer_subtitle">Radius, ringtone and vibration</string>
+    <string name="drawer_open">Open alarm settings</string>
+    <string name="drawer_close">Close alarm settings</string>
+    <string name="settings_hint">Open the menu (top-left) to set radius, ringtone and vibration</string>
+
+    <!-- Section headers -->
+    <string name="section_destination">DESTINATION</string>
+    <string name="tap_map_hint">or pick on map</string>
+
+    <!-- Inputs -->
+    <string name="label_latitude">LATITUDE</string>
+    <string name="label_longitude">LONGITUDE</string>
+    <string name="hint_latitude">e.g. 28.6139</string>
+    <string name="hint_longitude">e.g. 77.2090</string>
+    <string name="label_radius">Alert Radius</string>
+    <string name="label_ringtone">Alarm Ringtone</string>
+    <string name="label_vibration">Vibration Pattern</string>
+
+    <!-- Buttons -->
+    <string name="btn_start">Start Tracking</string>
+    <string name="btn_stop">Stop Tracking</string>
+    <string name="btn_pick_map">Pick Location on Map</string>
+    <string name="btn_choose_ringtone">Choose Ringtone</string>
+    <string name="confirm_location">Confirm This Location</string>
+
+    <!-- Status / Distance -->
+    <string name="status_label">CURRENT STATUS</string>
+    <string name="distance_to_dest">Distance to destination</string>
+    <string name="status_idle">Idle - Not Tracking</string>
+    <string name="status_tracking_started">Tracking Started</string>
+    <string name="status_outside_radius">Outside Radius</string>
+    <string name="status_inside_radius">ALARM - Inside Radius!</string>
+
+    <!-- Map picker -->
+    <string name="map_picker_title">Select Destination</string>
+    <string name="tap_to_select">Tap anywhere on the map to drop a pin</string>
+    <string name="destination">Destination</string>
+    <string name="coords_format">Lat: %.6f   Lon: %.6f</string>
+    <string name="location_selected">Location selected</string>
+    <string name="my_location">My Location</string>
+    <string name="locating">Getting your location...</string>
+
+    <!-- Ringtone -->
+    <string name="pick_ringtone">Select Alarm Ringtone</string>
+    <string name="ringtone_default">Default Alarm</string>
+    <string name="ringtone_silent">Silent (No Sound)</string>
+
+    <!-- Alarm notification -->
+    <string name="alarm_title">Geo Alert - Destination Nearby!</string>
+    <string name="alarm_message">You are within the set radius of your destination.</string>
+
+    <!-- Errors / dialogs -->
+    <string name="enter_coordinates">Please enter both latitude and longitude</string>
+    <string name="invalid_coordinates">Invalid coordinates. Lat -90 to 90, Lon -180 to 180</string>
+    <string name="permission_denied">Location permission is required for tracking</string>
+    <string name="background_permission_title">Background Location</string>
+    <string name="background_permission_message">For tracking when app is in background, please select Allow all the time on the next screen.</string>
+    <string name="grant">Grant</string>
+    <string name="skip">Skip</string>
+    <string name="gps_disabled_title">GPS Disabled</string>
+    <string name="gps_disabled_message">Location services are disabled. Please enable GPS to use Geo Alert.</string>
+    <string name="open_settings">Open Settings</string>
+    <string name="cancel">Cancel</string>
+
+    <string-array name="vibration_patterns">
+        <item>No Vibration</item>
+        <item>Short Pulse</item>
+        <item>Long Pulse</item>
+        <item>Triple Burst</item>
+        <item>SOS Pattern</item>
+    </string-array>
+    <!-- Search -->
+    <string name="search_place_hint">Search city, address, landmark…</string>
+    <string name="search_label">Search</string>
+    <string name="search_empty_hint">Please enter a place to search</string>
+    <string name="search_no_result">No location found. Try a different query.</string>
+    <string name="search_error">Search failed. Check internet connection.</string>
+
+</resources>
