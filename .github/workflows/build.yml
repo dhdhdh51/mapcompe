@@ -1,17 +1,19 @@
-name: GeoAlert Build
+name: Build Geo Alert APK
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [ "main" ]
   pull_request:
     branches: [ main, master ]
 
 jobs:
   build:
+    name: Build & Sign Release APK
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Set up JDK 17
@@ -19,8 +21,9 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
+          cache: gradle
 
-      - name: Cache Gradle
+      - name: Cache Gradle packages
         uses: actions/cache@v4
         with:
           path: |
@@ -30,14 +33,49 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
-      - name: Grant execute permission
+      - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: Build Release APK (unsigned)
-        run: ./gradlew assembleRelease
+      - name: Build Release APK
+        run: ./gradlew assembleRelease --stacktrace
 
-      - name: Upload Release APK
+      - name: Generate Keystore
+        run: |
+          keytool -genkeypair \
+            -keystore geoalert-release.jks \
+            -alias geoalert \
+            -keyalg RSA \
+            -keysize 2048 \
+            -validity 10000 \
+            -storepass geoalert123 \
+            -keypass geoalert123 \
+            -dname "CN=GeoAlert, OU=Dev, O=GeoAlert, L=India, S=UP, C=IN"
+
+      - name: Find build-tools version
+        run: ls $ANDROID_HOME/build-tools/ | tail -1
+
+      - name: Sign APK
+        run: |
+          BT=$(ls $ANDROID_HOME/build-tools/ | tail -1)
+          $ANDROID_HOME/build-tools/$BT/apksigner sign \
+            --ks geoalert-release.jks \
+            --ks-key-alias geoalert \
+            --ks-pass pass:geoalert123 \
+            --key-pass pass:geoalert123 \
+            --out app/build/outputs/apk/release/GeoAlert-signed.apk \
+            app/build/outputs/apk/release/app-release-unsigned.apk
+
+      - name: Upload Signed APK
         uses: actions/upload-artifact@v4
         with:
-          name: GeoAlert-release-unsigned
-          path: app/build/outputs/apk/release/*.apk
+          name: GeoAlert-signed-apk
+          path: app/build/outputs/apk/release/GeoAlert-signed.apk
+          retention-days: 30
+
+      - name: Upload Build Reports on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-reports
+          path: app/build/reports/
+          retention-days: 7
